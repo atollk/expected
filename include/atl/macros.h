@@ -9,6 +9,7 @@
 #define ATL_TRY_ASSIGN(TARGET, VAL)                                            \
   _ATL_TRY_ASSIGN(TARGET, VAL, _UNIQUE_TMP_ID(_atl_macro_assign_or_propagate))
 
+
 namespace detail {
 
 #define _ATL_TRY_ASSIGN(TARGET, VAL, TMP)                                      \
