@@ -3,7 +3,7 @@
 
 namespace atl {
 
-template <class E> class unexpected {
+template <class E> class [[nodiscard]] unexpected {
 public:
   static_assert(!std::is_same<E, void>::value, "E must not be void");
 
@@ -56,6 +56,6 @@ struct unexpect_t {
 };
 static constexpr unexpect_t unexpect{};
 
-}
+} // namespace atl
 
 #endif // ATL_EXPECTED_UNEXPECTED_H

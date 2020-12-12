@@ -35,10 +35,11 @@ namespace atl {
 /// has been destroyed. The initialization state of the contained object is
 /// tracked by the expected object.
 template <class T, class E>
-class expected : private detail::expected_move_assign_base<T, E>,
-                 private detail::expected_delete_ctor_base<T, E>,
-                 private detail::expected_delete_assign_base<T, E>,
-                 private detail::expected_default_ctor_base<T, E> {
+class [[nodiscard]] expected
+    : private detail::expected_move_assign_base<T, E>,
+      private detail::expected_delete_ctor_base<T, E>,
+      private detail::expected_delete_assign_base<T, E>,
+      private detail::expected_default_ctor_base<T, E> {
   static_assert(!std::is_reference<T>::value, "T must not be a reference");
   static_assert(!std::is_same<T, std::remove_cv<std::in_place_t>>::value,
                 "T must not be in_place_t");
@@ -544,6 +545,9 @@ public:
   constexpr const E &&error() const && { return std::move(err().value()); }
   constexpr E &&error() && { return std::move(err().value()); }
 
+  constexpr explicit operator unexpected<E>() const & { return err(); }
+  constexpr explicit operator unexpected<E>() && { return err(); }
+
   template <class U> constexpr T value_or(U &&v) const & {
     static_assert(std::is_copy_constructible<T>::value &&
                       std::is_convertible<U &&, T>::value,
@@ -556,6 +560,19 @@ public:
                   "T must be move-constructible and convertible to from U&&");
     return bool(*this) ? std::move(**this) : static_cast<T>(std::forward<U>(v));
   }
+
+  constexpr std::optional<T> ok() const & {
+    static_assert(std::is_copy_constructible_v<T>,
+                  "T must be copy-constructible.");
+    return bool(*this) ? std::optional<T>(**this) : std::nullopt;
+  }
+  constexpr std::optional<T> ok() && {
+    static_assert(std::is_move_constructible_v<T>,
+                  "T must be move-constructible.");
+    return bool(*this) ? std::optional(std::move(**this)) : std::nullopt;
+  }
+
+  void suppress() const && {}
 };
 
 template <class T, class E, class U, class F>

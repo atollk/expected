@@ -40,4 +40,8 @@ template <class T, class E> class expected;
 #include "detail/functional_extensions.h"
 #include "success.h"
 
+#ifndef ATL_EXPECTED_DISABLE_MACROS
+#include "macros.h"
+#endif
+
 #endif

@@ -67,11 +67,13 @@ set(test_sources
         tests/constexpr.cpp
         tests/constructors.cpp
         tests/emplace.cpp
-        tests/extensions.cpp
+        tests/functional_extensions.cpp
         tests/issues.cpp
+        tests/macros.cpp
         tests/main.cpp
         tests/noexcept.cpp
         tests/observers.cpp
+        tests/operational_extensions.cpp
         tests/relops.cpp
         tests/success.cpp
         tests/swap.cpp
