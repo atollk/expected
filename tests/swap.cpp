@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <tl/expected.hpp>
+#include <atl/expected.hpp>
 
 struct no_throw {
   no_throw(std::string i) : i(i) {}
@@ -9,6 +9,7 @@ struct canthrow_move {
   canthrow_move(std::string i) : i(i) {}
   canthrow_move(canthrow_move const &) = default;
   canthrow_move(canthrow_move &&other) noexcept(false) : i(other.i) {}
+  canthrow_move &operator=(canthrow_move const &) = default;
   canthrow_move &operator=(canthrow_move &&) = default;
   std::string i;
 };
@@ -24,32 +25,32 @@ struct willthrow_move {
   willthrow_move &operator=(willthrow_move &&) = default;
   std::string i;
 };
-static_assert(tl::detail::is_swappable<no_throw>::value, "");
+static_assert(atl::detail::is_swappable<no_throw>::value, "");
 
 template <class T1, class T2> void swap_test() {
   std::string s1 = "abcdefghijklmnopqrstuvwxyz";
   std::string s2 = "zyxwvutsrqponmlkjihgfedcba";
 
-  tl::expected<T1, T2> a{s1};
-  tl::expected<T1, T2> b{s2};
+  atl::expected<T1, T2> a{s1};
+  atl::expected<T1, T2> b{s2};
   swap(a, b);
   REQUIRE(a->i == s2);
   REQUIRE(b->i == s1);
 
   a = s1;
-  b = tl::unexpected<T2>(s2);
+  b = atl::unexpected<T2>(s2);
   swap(a, b);
   REQUIRE(a.error().i == s2);
   REQUIRE(b->i == s1);
 
-  a = tl::unexpected<T2>(s1);
+  a = atl::unexpected<T2>(s1);
   b = s2;
   swap(a, b);
   REQUIRE(a->i == s2);
   REQUIRE(b.error().i == s1);
 
-  a = tl::unexpected<T2>(s1);
-  b = tl::unexpected<T2>(s2);
+  a = atl::unexpected<T2>(s1);
+  b = atl::unexpected<T2>(s2);
   swap(a, b);
   REQUIRE(a.error().i == s2);
   REQUIRE(b.error().i == s1);
@@ -61,19 +62,19 @@ template <class T1, class T2> void swap_test() {
   REQUIRE(b->i == s1);
 
   a = s1;
-  b = tl::unexpected<T2>(s2);
+  b = atl::unexpected<T2>(s2);
   a.swap(b);
   REQUIRE(a.error().i == s2);
   REQUIRE(b->i == s1);
 
-  a = tl::unexpected<T2>(s1);
+  a = atl::unexpected<T2>(s1);
   b = s2;
   a.swap(b);
   REQUIRE(a->i == s2);
   REQUIRE(b.error().i == s1);
 
-  a = tl::unexpected<T2>(s1);
-  b = tl::unexpected<T2>(s2);
+  a = atl::unexpected<T2>(s1);
+  b = atl::unexpected<T2>(s2);
   a.swap(b);
   REQUIRE(a.error().i == s2);
   REQUIRE(b.error().i == s1);
@@ -87,8 +88,8 @@ TEST_CASE("swap") {
 
   std::string s1 = "abcdefghijklmnopqrstuvwxyz";
   std::string s2 = "zyxwvutsrqponmlkjihgfedcbaxxx";
-  tl::expected<no_throw, willthrow_move> a{s1};
-  tl::expected<no_throw, willthrow_move> b{tl::unexpect, s2};
+  atl::expected<no_throw, willthrow_move> a{s1};
+  atl::expected<no_throw, willthrow_move> b{atl::unexpect, s2};
   should_throw = 1;
 
   #ifdef _MSC_VER

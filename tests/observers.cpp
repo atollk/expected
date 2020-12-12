@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <tl/expected.hpp>
+#include <atl/expected.hpp>
 
 struct move_detector {
   move_detector() = default;
@@ -8,9 +8,9 @@ struct move_detector {
 };
 
 TEST_CASE("Observers", "[observers]") {
-    tl::expected<int,int> o1 = 42;
-    tl::expected<int,int> o2 {tl::unexpect, 0};
-    const tl::expected<int,int> o3 = 42;
+    atl::expected<int,int> o1 = 42;
+    atl::expected<int,int> o2 {atl::unexpect, 0};
+    const atl::expected<int,int> o3 = 42;
 
   REQUIRE(*o1 == 42);
   REQUIRE(*o1 == o1.value());
@@ -29,7 +29,7 @@ TEST_CASE("Observers", "[observers]") {
   REQUIRE(success);
   #endif
 
-  tl::expected<move_detector,int> o4{tl::in_place};
+  atl::expected<move_detector,int> o4{std::in_place};
   move_detector o5 = std::move(o4).value();
   REQUIRE(o4->been_moved);
   REQUIRE(!o5.been_moved);

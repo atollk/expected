@@ -1,4 +1,4 @@
-struct no_throw {
+#struct no_throw {
   no_throw(std::string i) : i(i) {}
   std::string i;
 };
@@ -25,8 +25,8 @@ struct willthrow_move {
 int main() {
   std::string s1 = "abcdefghijklmnopqrstuvwxyz";
   std::string s2 = "zyxwvutsrqponmlkjihgfedcbaxxx";
-  tl::expected<no_throw, willthrow_move> a{s1};
-  tl::expected<no_throw, willthrow_move> b{tl::unexpect, s2};
+  atl::expected<no_throw, willthrow_move> a{s1};
+  atl::expected<no_throw, willthrow_move> b{atl::unexpect, s2};
   should_throw = 1;
   swap(a, b);
 }
