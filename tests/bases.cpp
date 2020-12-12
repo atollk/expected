@@ -148,8 +148,8 @@ TEST_CASE("Deletion", "[bases.deletion]") {
     REQUIRE(std::is_move_constructible<decltype(e)>::value);
     REQUIRE(std::is_copy_assignable<decltype(e)>::value);
     REQUIRE(std::is_move_assignable<decltype(e)>::value);
-    REQUIRE(std::is_trivially_copy_constructible_v<decltype(e)>);
-    REQUIRE(std::is_trivially_copy_assignable_v<decltype(e)>);
+    REQUIRE(!std::is_trivially_copy_constructible_v<decltype(e)>);
+    REQUIRE(!std::is_trivially_copy_assignable_v<decltype(e)>);
     REQUIRE(!std::is_trivially_move_constructible<decltype(e)>::value);
     REQUIRE(!std::is_trivially_move_assignable<decltype(e)>::value);
   }
