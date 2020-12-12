@@ -35,6 +35,7 @@ file(GLOB_RECURSE headers CONFIGURE_DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/expected.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/bad_expected_access.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/expected_t.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/success.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/unexpected_t.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/detail/expected_five_bases.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/atl/detail/expected_operations_base.h"
@@ -72,6 +73,7 @@ set(test_sources
         tests/noexcept.cpp
         tests/observers.cpp
         tests/relops.cpp
+        tests/success.cpp
         tests/swap.cpp
         )
 add_executable(atl_expected_tests ${test_sources})

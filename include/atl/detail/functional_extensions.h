@@ -36,7 +36,7 @@ template <class Exp, class F,
                                            *std::declval<Exp>())),
           std::enable_if_t<!std::is_void<Ret>::value> * = nullptr>
 
-constexpr auto expected_map_impl(Exp &&exp, F &&f)
+constexpr auto map_impl(Exp &&exp, F &&f)
     -> ret_t<Exp, std::decay_t<Ret>> {
   using result = ret_t<Exp, std::decay_t<Ret>>;
 
@@ -51,7 +51,7 @@ template <class Exp, class F,
                                            *std::declval<Exp>())),
           std::enable_if_t<std::is_void<Ret>::value> * = nullptr>
 
-auto expected_map_impl(Exp &&exp, F &&f) -> expected<void, err_t<Exp>> {
+auto map_impl(Exp &&exp, F &&f) -> expected<void, err_t<Exp>> {
   if (exp.has_value()) {
     std::invoke(std::forward<F>(f), *std::forward<Exp>(exp));
     return {};
@@ -65,7 +65,7 @@ template <class Exp, class F,
           class Ret = decltype(std::invoke(std::declval<F>())),
           std::enable_if_t<!std::is_void<Ret>::value> * = nullptr>
 
-constexpr auto expected_map_impl(Exp &&exp, F &&f)
+constexpr auto map_impl(Exp &&exp, F &&f)
     -> ret_t<Exp, std::decay_t<Ret>> {
   using result = ret_t<Exp, std::decay_t<Ret>>;
 
@@ -78,7 +78,7 @@ template <class Exp, class F,
           class Ret = decltype(std::invoke(std::declval<F>())),
           std::enable_if_t<std::is_void<Ret>::value> * = nullptr>
 
-auto expected_map_impl(Exp &&exp, F &&f) -> expected<void, err_t<Exp>> {
+auto map_impl(Exp &&exp, F &&f) -> expected<void, err_t<Exp>> {
   if (exp.has_value()) {
     std::invoke(std::forward<F>(f));
     return {};

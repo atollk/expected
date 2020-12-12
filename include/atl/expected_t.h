@@ -7,6 +7,24 @@
 #include "detail/expected_operations_base.h"
 #include "detail/expected_storage_base.h"
 
+#if defined(__EXCEPTIONS) || defined(_CPPUNWIND)
+#define ATL_EXPECTED_EXCEPTIONS_ENABLED
+#endif
+
+#define FUNCTIONAL_METHOD(NAME)                                                \
+  template <class F> constexpr auto NAME(F &&f) & {                            \
+    return NAME##_impl(*this, std::forward<F>(f));                             \
+  }                                                                            \
+  template <class F> constexpr auto NAME(F &&f) && {                           \
+    return NAME##_impl(std::move(*this), std::forward<F>(f));                  \
+  }                                                                            \
+  template <class F> constexpr auto NAME(F &&f) const & {                      \
+    return NAME##_impl(*this, std::forward<F>(f));                             \
+  }                                                                            \
+  template <class F> constexpr auto NAME(F &&f) const && {                     \
+    return NAME##_impl(std::move(*this), std::forward<F>(f));                  \
+  }
+
 namespace atl {
 
 /// An `expected<T, E>` object is an object that contains the storage for
@@ -53,204 +71,16 @@ class expected : private detail::expected_move_assign_base<T, E>,
   using ctor_base = detail::expected_default_ctor_base<T, E>;
 
 public:
-  typedef T value_type;
-  typedef E error_type;
-  typedef unexpected<E> unexpected_type;
+  using value_type = T;
+  using error_type = E;
+  using unexpected_type = unexpected<E>;
 
-#if defined(TL_EXPECTED_CXX14) && !defined(TL_EXPECTED_GCC49) &&               \
-    !defined(TL_EXPECTED_GCC54) && !defined(TL_EXPECTED_GCC55)
-  template <class F> constexpr auto and_then(F &&f) & {
-    return and_then_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto and_then(F &&f) && {
-    return and_then_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F> constexpr auto and_then(F &&f) const & {
-    return and_then_impl(*this, std::forward<F>(f));
-  }
+  FUNCTIONAL_METHOD(and_then)
+  FUNCTIONAL_METHOD(map)
+  FUNCTIONAL_METHOD(transform)
+  FUNCTIONAL_METHOD(map_error)
+  FUNCTIONAL_METHOD(or_else)
 
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F> constexpr auto and_then(F &&f) const && {
-    return and_then_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
-
-#else
-  template <class F>
-  constexpr auto
-  and_then(F &&f) & -> decltype(and_then_impl(std::declval<expected &>(),
-                                              std::forward<F>(f))) {
-    return and_then_impl(*this, std::forward<F>(f));
-  }
-  template <class F>
-  constexpr auto
-  and_then(F &&f) && -> decltype(and_then_impl(std::declval<expected &&>(),
-                                               std::forward<F>(f))) {
-    return and_then_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F>
-  constexpr auto and_then(F &&f) const & -> decltype(and_then_impl(
-      std::declval<expected const &>(), std::forward<F>(f))) {
-    return and_then_impl(*this, std::forward<F>(f));
-  }
-
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F>
-  constexpr auto and_then(F &&f) const && -> decltype(and_then_impl(
-      std::declval<expected const &&>(), std::forward<F>(f))) {
-    return and_then_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
-#endif
-
-#if defined(TL_EXPECTED_CXX14) && !defined(TL_EXPECTED_GCC49) &&               \
-    !defined(TL_EXPECTED_GCC54) && !defined(TL_EXPECTED_GCC55)
-  template <class F> constexpr auto map(F &&f) & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto map(F &&f) && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F> constexpr auto map(F &&f) const & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto map(F &&f) const && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-#else
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<expected &>(),
-                                       std::declval<F &&>()))
-  map(F &&f) & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<expected>(),
-                                       std::declval<F &&>()))
-  map(F &&f) && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<const expected &>(),
-                                       std::declval<F &&>()))
-  map(F &&f) const & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<const expected &&>(),
-                                       std::declval<F &&>()))
-  map(F &&f) const && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
-#endif
-
-#if defined(TL_EXPECTED_CXX14) && !defined(TL_EXPECTED_GCC49) &&               \
-    !defined(TL_EXPECTED_GCC54) && !defined(TL_EXPECTED_GCC55)
-  template <class F> constexpr auto transform(F &&f) & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto transform(F &&f) && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F> constexpr auto transform(F &&f) const & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto transform(F &&f) const && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-#else
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<expected &>(),
-                                       std::declval<F &&>()))
-  transform(F &&f) & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<expected>(),
-                                       std::declval<F &&>()))
-  transform(F &&f) && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<const expected &>(),
-                                       std::declval<F &&>()))
-  transform(F &&f) const & {
-    return expected_map_impl(*this, std::forward<F>(f));
-  }
-
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F>
-  constexpr decltype(expected_map_impl(std::declval<const expected &&>(),
-                                       std::declval<F &&>()))
-  transform(F &&f) const && {
-    return expected_map_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
-#endif
-
-#if defined(TL_EXPECTED_CXX14) && !defined(TL_EXPECTED_GCC49) &&               \
-    !defined(TL_EXPECTED_GCC54) && !defined(TL_EXPECTED_GCC55)
-  template <class F> constexpr auto map_error(F &&f) & {
-    return map_error_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto map_error(F &&f) && {
-    return map_error_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F> constexpr auto map_error(F &&f) const & {
-    return map_error_impl(*this, std::forward<F>(f));
-  }
-  template <class F> constexpr auto map_error(F &&f) const && {
-    return map_error_impl(std::move(*this), std::forward<F>(f));
-  }
-#else
-  template <class F>
-  constexpr decltype(map_error_impl(std::declval<expected &>(),
-                                    std::declval<F &&>()))
-  map_error(F &&f) & {
-    return map_error_impl(*this, std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(map_error_impl(std::declval<expected &&>(),
-                                    std::declval<F &&>()))
-  map_error(F &&f) && {
-    return map_error_impl(std::move(*this), std::forward<F>(f));
-  }
-  template <class F>
-  constexpr decltype(map_error_impl(std::declval<const expected &>(),
-                                    std::declval<F &&>()))
-  map_error(F &&f) const & {
-    return map_error_impl(*this, std::forward<F>(f));
-  }
-
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F>
-  constexpr decltype(map_error_impl(std::declval<const expected &&>(),
-                                    std::declval<F &&>()))
-  map_error(F &&f) const && {
-    return map_error_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
-#endif
-  template <class F> expected constexpr or_else(F &&f) & {
-    return or_else_impl(*this, std::forward<F>(f));
-  }
-
-  template <class F> expected constexpr or_else(F &&f) && {
-    return or_else_impl(std::move(*this), std::forward<F>(f));
-  }
-
-  template <class F> expected constexpr or_else(F &&f) const & {
-    return or_else_impl(*this, std::forward<F>(f));
-  }
-
-#ifndef TL_EXPECTED_NO_CONSTRR
-  template <class F> expected constexpr or_else(F &&f) const && {
-    return or_else_impl(std::move(*this), std::forward<F>(f));
-  }
-#endif
   constexpr expected() = default;
   constexpr expected(const expected &rhs) = default;
   constexpr expected(expected &&rhs) = default;
@@ -267,7 +97,8 @@ public:
   template <class U, class... Args,
             std::enable_if_t<std::is_constructible<
                 T, std::initializer_list<U> &, Args &&...>::value> * = nullptr>
-  constexpr expected(std::in_place_t, std::initializer_list<U> il, Args &&...args)
+  constexpr expected(std::in_place_t, std::initializer_list<U> il,
+                     Args &&...args)
       : impl_base(std::in_place, il, std::forward<Args>(args)...),
         ctor_base(detail::default_constructor_tag{}) {}
 
@@ -385,8 +216,7 @@ public:
   template <class U = T,
             std::enable_if_t<std::is_convertible<U &&, T>::value> * = nullptr,
             detail::expected_enable_forward_value<T, E, U> * = nullptr>
-  constexpr expected(U &&v)
-      : expected(std::in_place, std::forward<U>(v)) {}
+  constexpr expected(U &&v) : expected(std::in_place, std::forward<U>(v)) {}
 
   template <class U = T, class G = T,
             std::enable_if_t<std::is_nothrow_constructible<T, U &&>::value> * =
@@ -395,9 +225,8 @@ public:
             std::enable_if_t<(
                 !std::is_same_v<expected<T, E>, std::decay_t<U>> &&
                 !std::conjunction_v<std::is_scalar<T>,
-                                     std::is_same<T, std::decay_t<U>>> &&
-                std::is_constructible_v<T, U> &&
-                std::is_assignable_v<G &, U> &&
+                                    std::is_same<T, std::decay_t<U>>> &&
+                std::is_constructible_v<T, U> && std::is_assignable_v<G &, U> &&
                 std::is_nothrow_move_constructible_v<E>)> * = nullptr>
   expected &operator=(U &&v) {
     if (has_value()) {
@@ -415,13 +244,13 @@ public:
             std::enable_if_t<!std::is_nothrow_constructible<T, U &&>::value> * =
                 nullptr,
             std::enable_if_t<!std::is_void<U>::value> * = nullptr,
-            std::enable_if_t<(
-                !std::is_same<expected<T, E>, std::decay_t<U>>::value &&
-                !std::conjunction<std::is_scalar<T>,
-                                     std::is_same<T, std::decay_t<U>>>::value &&
-                std::is_constructible<T, U>::value &&
-                std::is_assignable<G &, U>::value &&
-                std::is_nothrow_move_constructible<E>::value)> * = nullptr>
+            std::enable_if_t<
+                (!std::is_same<expected<T, E>, std::decay_t<U>>::value &&
+                 !std::conjunction<std::is_scalar<T>,
+                                   std::is_same<T, std::decay_t<U>>>::value &&
+                 std::is_constructible<T, U>::value &&
+                 std::is_assignable<G &, U>::value &&
+                 std::is_nothrow_move_constructible<E>::value)> * = nullptr>
   expected &operator=(U &&v) {
     if (has_value()) {
       val() = std::forward<U>(v);

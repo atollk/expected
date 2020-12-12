@@ -1,6 +1,10 @@
 #ifndef ATL_EXPECTED_BAD_EXPECTED_ACCESS_H
 #define ATL_EXPECTED_BAD_EXPECTED_ACCESS_H
 
+#if defined(__EXCEPTIONS) || defined(_CPPUNWIND)
+#define ATL_EXPECTED_EXCEPTIONS_ENABLED
+#endif
+
 namespace atl {
 template <class E> class bad_expected_access : public std::exception {
 public:

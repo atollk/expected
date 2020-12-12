@@ -38,5 +38,6 @@ template <class T, class E> class expected;
 #include "bad_expected_access.h"
 #include "expected_t.h"
 #include "detail/functional_extensions.h"
+#include "success.h"
 
 #endif
