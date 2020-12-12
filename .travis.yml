@@ -61,65 +61,65 @@ matrix:
             - libc++-dev
       env: COMPILER=clang++-5.0 CXXSTD=17
     - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-6.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-6.0
-          - libc++-dev
-    env: COMPILER=clang++-6.0 CXXSTD=17
-      - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-7.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-7.0
-          - libc++-dev
-    env: COMPILER=clang++-7.0 CXXSTD=17
-      - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-8.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-8.0
-          - libc++-dev
-    env: COMPILER=clang++-8.0 CXXSTD=17
-      - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-9.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-9.0
-          - libc++-dev
-    env: COMPILER=clang++-9.0 CXXSTD=17
-      - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-10.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-10.0
-          - libc++-dev
-    env: COMPILER=clang++-10.0 CXXSTD=17
-      - compiler: clang
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-11.0
-          - ubuntu-toolchain-r-test
-        packages:
-          - clang++-11.0
-          - libc++-dev
-    env: COMPILER=clang++-11.0 CXXSTD=17
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-6.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-6.0
+            - libc++-dev
+      env: COMPILER=clang++-6.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-7.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-7.0
+            - libc++-dev
+      env: COMPILER=clang++-7.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-8.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-8.0
+            - libc++-dev
+      env: COMPILER=clang++-8.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-9.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-9.0
+            - libc++-dev
+      env: COMPILER=clang++-9.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-10.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-10.0
+            - libc++-dev
+      env: COMPILER=clang++-10.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-11.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-11.0
+            - libc++-dev
+      env: COMPILER=clang++-11.0 CXXSTD=17
 
 before_install:
   - sudo apt update
