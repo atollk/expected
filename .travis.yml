@@ -10,16 +10,8 @@ matrix:
           sources:
              - ubuntu-toolchain-r-test
           packages:
-             - g++-5
-      env: COMPILER=g++-5 CXXSTD=11  
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-             - ubuntu-toolchain-r-test
-          packages:
              - g++-6
-      env: COMPILER=g++-6 CXXSTD=11
+      env: COMPILER=g++-6 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
@@ -27,7 +19,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-7
-      env: COMPILER=g++-7 CXXSTD=11
+      env: COMPILER=g++-7 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
@@ -35,23 +27,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-8
-      env: COMPILER=g++-8 CXXSTD=11
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-             - ubuntu-toolchain-r-test
-          packages:
-             - g++-4.9
-      env: COMPILER=g++-4.9 CXXSTD=11
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-             - ubuntu-toolchain-r-test
-          packages:
-             - g++-4.8
-      env: COMPILER=g++-4.8 CXXSTD=11
+      env: COMPILER=g++-8 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -61,7 +37,7 @@ matrix:
           packages:
              - clang++-3.5
              - libc++-dev
-      env: COMPILER=clang++-3.5 CXXSTD=11
+      env: COMPILER=clang++-3.5 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -71,7 +47,7 @@ matrix:
           packages:
              - clang++-3.6
              - libc++-dev
-      env: COMPILER=clang++-3.6 CXXSTD=11
+      env: COMPILER=clang++-3.6 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -81,7 +57,7 @@ matrix:
           packages:
              - clang++-3.7
              - libc++-dev
-      env: COMPILER=clang++-3.7 CXXSTD=11
+      env: COMPILER=clang++-3.7 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -92,7 +68,7 @@ matrix:
           packages:
              - clang++-3.8
              - libc++-dev
-      env: COMPILER=clang++-3.8 CXXSTD=11
+      env: COMPILER=clang++-3.8 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -103,7 +79,7 @@ matrix:
           packages:
             - clang++-3.9
             - libc++-dev
-      env: COMPILER=clang++-3.9 CXXSTD=11
+      env: COMPILER=clang++-3.9 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -113,7 +89,7 @@ matrix:
           packages:
              - clang++-4.0
              - libc++-dev
-      env: COMPILER=clang++-4.0 CXXSTD=11
+      env: COMPILER=clang++-4.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -123,7 +99,7 @@ matrix:
           packages:
              - clang++-5.0
              - libc++-dev
-      env: COMPILER=clang++-5.0 CXXSTD=11             
+      env: COMPILER=clang++-5.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -133,7 +109,7 @@ matrix:
           packages:
              - clang++-6.0
              - libc++-dev
-      env: COMPILER=clang++-6.0 CXXSTD=11             
+      env: COMPILER=clang++-6.0 CXXSTD=1
 
     - compiler: gcc
       addons:
@@ -142,7 +118,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-5
-      env: COMPILER=g++-5 CXXSTD=14
+      env: COMPILER=g++-5 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
@@ -150,7 +126,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-6
-      env: COMPILER=g++-6 CXXSTD=14
+      env: COMPILER=g++-6 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
@@ -158,7 +134,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-7
-      env: COMPILER=g++-7 CXXSTD=14
+      env: COMPILER=g++-7 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
@@ -166,7 +142,7 @@ matrix:
              - ubuntu-toolchain-r-test
           packages:
              - g++-8
-      env: COMPILER=g++-8 CXXSTD=14      
+      env: COMPILER=g++-8 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -176,7 +152,7 @@ matrix:
           packages:
              - clang++-3.5
              - libc++-dev
-      env: COMPILER=clang++-3.5 CXXSTD=14
+      env: COMPILER=clang++-3.5 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -186,7 +162,7 @@ matrix:
           packages:
              - clang++-3.6
              - libc++-dev
-      env: COMPILER=clang++-3.6 CXXSTD=14
+      env: COMPILER=clang++-3.6 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -196,7 +172,7 @@ matrix:
           packages:
              - clang++-3.7
              - libc++-dev
-      env: COMPILER=clang++-3.7 CXXSTD=14
+      env: COMPILER=clang++-3.7 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -207,7 +183,7 @@ matrix:
           packages:
              - clang++-3.8
              - libc++-dev
-      env: COMPILER=clang++-3.8 CXXSTD=14
+      env: COMPILER=clang++-3.8 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -218,7 +194,7 @@ matrix:
           packages:
             - clang++-3.9
             - libc++-dev
-      env: COMPILER=clang++-3.9 CXXSTD=14
+      env: COMPILER=clang++-3.9 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -228,7 +204,7 @@ matrix:
           packages:
              - clang++-4.0
              - libc++-dev
-      env: COMPILER=clang++-4.0 CXXSTD=14
+      env: COMPILER=clang++-4.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -238,7 +214,7 @@ matrix:
           packages:
              - clang++-5.0
              - libc++-dev
-      env: COMPILER=clang++-5.0 CXXSTD=14      
+      env: COMPILER=clang++-5.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
@@ -248,7 +224,7 @@ matrix:
           packages:
              - clang++-6.0
              - libc++-dev
-      env: COMPILER=clang++-6.0 CXXSTD=14      
+      env: COMPILER=clang++-6.0 CXXSTD=17
       
 before_install:
   - sudo apt update

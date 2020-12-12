@@ -1,12 +1,15 @@
 #ifndef ATL_EXPECTED_MACROS_H
 #define ATL_EXPECTED_MACROS_H
 
-#include <boost/outcome/try.hpp>
-
 #define ATL_TRY(VAL)                                                           \
   if (auto _atl_macro_propagate_error = (VAL);                                 \
       !_atl_macro_propagate_error.has_value())                                 \
     return _atl_macro_propagate_error;
+
+#define ATL_TRY_ASSIGN(TARGET, VAL)                                            \
+  _ATL_TRY_ASSIGN(TARGET, VAL, _UNIQUE_TMP_ID(_atl_macro_assign_or_propagate))
+
+namespace detail {
 
 #define _ATL_TRY_ASSIGN(TARGET, VAL, TMP)                                      \
   auto TMP = (VAL);                                                            \
@@ -22,7 +25,6 @@
 #define _UNIQUE_TMP_ID(X) _CONCAT2(X, __LINE__)
 #endif
 
-#define ATL_TRY_ASSIGN(TARGET, VAL)                                            \
-  _ATL_TRY_ASSIGN(TARGET, VAL, _UNIQUE_TMP_ID(_atl_macro_assign_or_propagate))
+} // namespace detail
 
 #endif // ATL_EXPECTED_MACROS_H
