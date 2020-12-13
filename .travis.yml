@@ -41,8 +41,6 @@ matrix:
           packages:
             - cmake
             - clang++-8
-            - libc++abi-8-dev
-            - libc++abi1-8
             - libc++-dev
       env: COMPILER=clang++-8 CXXSTD=17
     - compiler: clang
@@ -50,9 +48,7 @@ matrix:
         apt:
           packages:
             - cmake
-            - clang++-9
-            - libc++abi-9-dev
-            - libc++abi1-9
+            - clang++-9.0
             - libc++-dev
       env: COMPILER=clang++-9 CXXSTD=17
     - compiler: clang
