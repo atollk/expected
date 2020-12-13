@@ -1,6 +1,8 @@
 #ifndef ATL_EXPECTED_EXPECTED_FIVE_BASES_H
 #define ATL_EXPECTED_EXPECTED_FIVE_BASES_H
 
+#include <type_traits>
+
 namespace atl::detail {
 
 // This class manages conditionally having a trivial copy constructor

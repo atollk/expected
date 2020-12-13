@@ -8,43 +8,71 @@ matrix:
       addons:
         apt:
           packages:
+            - cmake
             - g++-7
       env: COMPILER=g++-7 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
           packages:
+            - cmake
             - g++-8
       env: COMPILER=g++-8 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
           packages:
+            - cmake
             - g++-9
       env: COMPILER=g++-9 CXXSTD=17
     - compiler: gcc
       addons:
         apt:
           packages:
+            - cmake
             - g++-10
       env: COMPILER=g++-10 CXXSTD=17
     - compiler: clang
       addons:
         apt:
           packages:
+            - cmake
+            - clang++-7
+            - libc++abi-7-dev
+            - libc++-dev
+      env: COMPILER=clang++-7 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          packages:
+            - cmake
+            - clang++-8
+            - libc++abi-8-dev
+            - libc++-dev
+      env: COMPILER=clang++-8 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          packages:
+            - cmake
+            - clang++-9
+            - libc++abi-9-dev
+            - libc++-dev
+      env: COMPILER=clang++-9 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          packages:
+            - cmake
             - clang++-10
             - libc++abi-10-dev
             - libc++-dev
       env: COMPILER=clang++-10 CXXSTD=17
 
 
-before_install:
-  - sudo apt update
-
 install:
   - if [ "$CXX" = "clang++" ]; then export CXX="$COMPILER -stdlib=libc++"; fi
   - if [ "$CXX" = "g++" ]; then export CXX="$COMPILER"; fi
-  - sudo apt install -y cmake
 
 script:
   - /usr/bin/cmake -B build -S . "-DCMAKE_CXX_STANDARD=$CXXSTD"

@@ -1,6 +1,8 @@
 #ifndef ATL_EXPECTED_FUNCTIONAL_EXTENSIONS_H
 #define ATL_EXPECTED_FUNCTIONAL_EXTENSIONS_H
 
+#include <type_traits>
+
 namespace atl::detail {
 struct monostate {};
 template <class Exp> using exp_t = typename std::decay_t<Exp>::value_type;

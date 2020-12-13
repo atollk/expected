@@ -2,6 +2,7 @@
 #define ATL_EXPECTED_EXPECTED_STORAGE_BASE_H
 
 #include "no_init_t.h"
+#include <type_traits>
 
 namespace atl::detail {
 

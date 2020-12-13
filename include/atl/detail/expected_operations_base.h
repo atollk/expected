@@ -1,6 +1,8 @@
 #ifndef ATL_EXPECTED_EXPECTED_OPERATIONS_BASE_H
 #define ATL_EXPECTED_EXPECTED_OPERATIONS_BASE_H
 
+#include <type_traits>
+
 namespace atl::detail {
 
 // This base class provides some handy member functions which can be used in

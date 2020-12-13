@@ -1,6 +1,8 @@
 #ifndef ATL_EXPECTED_TRAITS_H
 #define ATL_EXPECTED_TRAITS_H
 
+#include <type_traits>
+
 namespace atl::detail {
 
 // https://stackoverflow.com/questions/26744589/what-is-a-proper-way-to-implement-is-swappable-to-test-for-the-swappable-concept
