@@ -28,6 +28,13 @@ matrix:
           packages:
             - g++-10
       env: COMPILER=g++-10 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          packages:
+            - clang++-10.0
+            - libc++-dev
+      env: COMPILER=clang++-9.0 CXXSTD=17
 
 
 before_install:
