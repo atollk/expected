@@ -9,13 +9,6 @@ matrix:
         apt:
           packages:
             - cmake
-            - g++-7
-      env: COMPILER=g++-7 CXXSTD=17
-    - compiler: gcc
-      addons:
-        apt:
-          packages:
-            - cmake
             - g++-8
       env: COMPILER=g++-8 CXXSTD=17
     - compiler: gcc
@@ -39,6 +32,7 @@ matrix:
             - cmake
             - clang++-7
             - libc++abi-7-dev
+            - libc++abi1-7
             - libc++-dev
       env: COMPILER=clang++-7 CXXSTD=17
     - compiler: clang
@@ -48,6 +42,7 @@ matrix:
             - cmake
             - clang++-8
             - libc++abi-8-dev
+            - libc++abi1-8
             - libc++-dev
       env: COMPILER=clang++-8 CXXSTD=17
     - compiler: clang
@@ -57,6 +52,7 @@ matrix:
             - cmake
             - clang++-9
             - libc++abi-9-dev
+            - libc++abi1-9
             - libc++-dev
       env: COMPILER=clang++-9 CXXSTD=17
     - compiler: clang
