@@ -2,6 +2,7 @@
 #define ATL_EXPECTED_EXPECTED_T_H
 
 #include <utility>
+#include <optional>
 
 #include "detail/expected_five_bases.h"
 #include "detail/expected_operations_base.h"
