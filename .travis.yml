@@ -32,6 +32,7 @@ matrix:
             - llvm-toolchain-focal-5.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-5.0
             - libc++-dev
       env: COMPILER=clang++-5.0 CXXSTD=17
@@ -42,6 +43,7 @@ matrix:
             - llvm-toolchain-focal-6.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-6.0
             - libc++-dev
       env: COMPILER=clang++-6.0 CXXSTD=17
@@ -52,6 +54,7 @@ matrix:
             - llvm-toolchain-focal-7.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-7.0
             - libc++-dev
       env: COMPILER=clang++-7.0 CXXSTD=17
@@ -62,6 +65,7 @@ matrix:
             - llvm-toolchain-focal-8.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-8.0
             - libc++-dev
       env: COMPILER=clang++-8.0 CXXSTD=17
@@ -72,6 +76,7 @@ matrix:
             - llvm-toolchain-focal-9.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-9.0
             - libc++-dev
       env: COMPILER=clang++-9.0 CXXSTD=17
@@ -82,6 +87,7 @@ matrix:
             - llvm-toolchain-focal-10.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-10.0
             - libc++-dev
       env: COMPILER=clang++-10.0 CXXSTD=17
@@ -92,6 +98,7 @@ matrix:
             - llvm-toolchain-focal-11.0
             - ubuntu-toolchain-r-test
           packages:
+            - cmake
             - clang++-11.0
             - libc++-dev
       env: COMPILER=clang++-11.0 CXXSTD=17
