@@ -12,6 +12,31 @@ matrix:
           packages:
             - g++-7
       env: COMPILER=g++-7 CXXSTD=17
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env: COMPILER=g++-8 CXXSTD=17
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-9
+      env: COMPILER=g++-9 CXXSTD=17
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-10
+      env: COMPILER=g++-10 CXXSTD=17
+
 
 before_install:
   - sudo apt update
