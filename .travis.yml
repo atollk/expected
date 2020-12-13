@@ -48,8 +48,8 @@ matrix:
         apt:
           packages:
             - cmake
-            - clang++-9.0
-            - libc++-dev
+            - clang++-9
+            - libc++abi-9-dev
       env: COMPILER=clang++-9 CXXSTD=17
     - compiler: clang
       addons:
