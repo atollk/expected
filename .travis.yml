@@ -33,6 +33,7 @@ matrix:
         apt:
           packages:
             - clang++-10
+            - libc++abi1-10
             - libc++-dev
       env: COMPILER=clang++-10 CXXSTD=17
 
