@@ -28,38 +28,73 @@ matrix:
     - compiler: clang
       addons:
         apt:
+          sources:
+            - llvm-toolchain-focal-5.0
+            - ubuntu-toolchain-r-test
           packages:
-            - cmake
-            - clang++-7
-            - libc++abi-7-dev
-            - libc++abi1-7
+            - clang++-5.0
             - libc++-dev
-      env: COMPILER=clang++-7 CXXSTD=17
+      env: COMPILER=clang++-5.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
+          sources:
+            - llvm-toolchain-focal-6.0
+            - ubuntu-toolchain-r-test
           packages:
-            - cmake
-            - clang++-8
+            - clang++-6.0
             - libc++-dev
-      env: COMPILER=clang++-8 CXXSTD=17
+      env: COMPILER=clang++-6.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
+          sources:
+            - llvm-toolchain-focal-7.0
+            - ubuntu-toolchain-r-test
           packages:
-            - cmake
-            - clang++-9
-            - libc++abi-9-dev
-      env: COMPILER=clang++-9 CXXSTD=17
+            - clang++-7.0
+            - libc++-dev
+      env: COMPILER=clang++-7.0 CXXSTD=17
     - compiler: clang
       addons:
         apt:
+          sources:
+            - llvm-toolchain-focal-8.0
+            - ubuntu-toolchain-r-test
           packages:
-            - cmake
-            - clang++-10
-            - libc++abi-10-dev
+            - clang++-8.0
             - libc++-dev
-      env: COMPILER=clang++-10 CXXSTD=17
+      env: COMPILER=clang++-8.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-focal-9.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-9.0
+            - libc++-dev
+      env: COMPILER=clang++-9.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-focal-10.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-10.0
+            - libc++-dev
+      env: COMPILER=clang++-10.0 CXXSTD=17
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-focal-11.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++-11.0
+            - libc++-dev
+      env: COMPILER=clang++-11.0 CXXSTD=17
 
 
 install:
