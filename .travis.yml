@@ -32,9 +32,9 @@ matrix:
       addons:
         apt:
           packages:
-            - clang++-10.0
+            - clang++-10
             - libc++-dev
-      env: COMPILER=clang++-9.0 CXXSTD=17
+      env: COMPILER=clang++-10 CXXSTD=17
 
 
 before_install:
